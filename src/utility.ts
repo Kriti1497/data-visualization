@@ -2,7 +2,7 @@ import { wineData } from "./dataset";
 
 // Utility function to calculate the mean of an array of numbers
 export const calculateMean = (numbers: number[]) => {
-    const sum = numbers.reduce((acc, num) => acc + num, 0);
+    const sum = numbers.reduce((acc: number, num: number) => Number(acc) + Number(num), 0);
     return sum / numbers?.length;
 };
 // Utility function to calculate the median of an array of numbers
@@ -36,7 +36,6 @@ export const calculateMode = (numbers: number[]) => {
 };
 interface ClassStats {
     [key: string]: {
-        count: number;
         flavanoids: any[];
     };
 }
@@ -48,23 +47,19 @@ export const FlavanoidsStats = () => {
         const alcoholClass = entry.Alcohol;
         if (!alcoholClassStats[alcoholClass]) {
             alcoholClassStats[alcoholClass] = {
-                count: 0,
                 flavanoids: [],
             };
         }
-        alcoholClassStats[alcoholClass].count++;
         alcoholClassStats[alcoholClass].flavanoids.push(entry.Flavanoids);
     });
     const statsTable = [];
     for (const alcoholClass in alcoholClassStats) {
-        const count = alcoholClassStats[alcoholClass].count;
         const flavanoids = alcoholClassStats[alcoholClass].flavanoids;
         const mean = calculateMean(flavanoids);
         const median = calculateMedian(flavanoids);
         const mode = calculateMode(flavanoids);
         statsTable.push({
             alcoholClass,
-            count,
             mean,
             median,
             mode,
@@ -75,11 +70,11 @@ export const FlavanoidsStats = () => {
 
 interface ClassGammaStats {
     [key: string]: {
-        count: number;
         gammaValues: any[]
     };
 }
 // function to segregate data on the basis of alcohol class for Gamma
+// firstly the data has been calculated to fetch the gamma value and tehn embedded in the dataset itself
 export const GammaStats = () => {
     const pointsWithGamma = wineData.map((gammaValue: any) => {
         const gamma = (gammaValue.Ash * gammaValue.Hue) / gammaValue.Magnesium;
@@ -90,23 +85,19 @@ export const GammaStats = () => {
         const alcoholClass = point.Alcohol;
         if (!gammaStats[alcoholClass]) {
             gammaStats[alcoholClass] = {
-                count: 0,
                 gammaValues: [],
             };
         }
-        gammaStats[alcoholClass].count++;
         gammaStats[alcoholClass].gammaValues.push(point.Gamma);
     });
     const gammaTable = [];
     for (const alcoholClass in gammaStats) {
-        const count = gammaStats[alcoholClass].count;
         const values = gammaStats[alcoholClass].gammaValues;
         const mean = calculateMean(values);
         const median = calculateMedian(values);
         const mode = calculateMode(values);
         gammaTable.push({
             alcoholClass,
-            count,
             mean,
             median,
             mode,
