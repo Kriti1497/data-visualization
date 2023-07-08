@@ -11,6 +11,9 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+![Screenshot from 2023-07-08 02-06-22](https://github.com/Kriti1497/data-visualization/assets/91423390/02d2807b-c50b-4a03-9239-c3f1fd75bad0)
+
+
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
